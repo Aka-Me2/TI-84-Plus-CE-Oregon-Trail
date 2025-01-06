@@ -1,0 +1,96 @@
+Section          Base   Top    High   Length
+---------------- ------ ------ ------ -------
+.icon            D1A882 D1A8AA            28h
+.init.libs       D1A8AA D1A8AA             0h
+.libs            D1A8AA D1A8AA             0h
+.init.clock      D1A8AA D1A8AA             0h
+.init.reruncheck D1A8AA D1A8AA             0h
+.init            D1A8AA D1A8D1            27h
+.fini            D1A8D1 D1A905            34h
+.text            D1A905 D1AE9D           598h
+.data            D1AE9D D1AE9D             0h
+.rodata          D1AE9D D1B63C           79Fh
+.init_array      000000 000000             0h
+.ctors           000000 000000             0h
+.dtors           000000 000000             0h
+.fini_array      000000 000000             0h
+.bss             D052C6 D052C9 D13FD8      3h
+.header          D1A87F D1A882             3h
+
+Label                        Value
+--------------------------   ------
+___low_bss                 = D052C6
+___len_bss                 = 000003
+___heaptop                 = D13FD8
+___heapbot                 = D052C9
+___libs                    = D1A8AA
+___init_array_count        = 000000
+___ctors_count             = 000000
+___dtors_count             = 000000
+___fini_array_count        = 000000
+__stack                    = D1A87E
+__frameset                 = D1A905
+__frameset0                = D1A913
+_os_GetStringInput         = D1A91E
+_os_GetTokenInput          = D1A9FC
+_os_DisableHomeTextBuffer  = D1AAD8
+_os_EnableHomeTextBuffer   = D1AAEA
+_os_NewLine                = 0207F0
+_os_ClrLCD                 = 02080C
+_os_HomeUp                 = 020828
+_os_DrawStatusBar          = 021A3C
+_os_PutStrFull             = 021D2C
+_strcmp                    = 0000C8
+__start                    = D1A8AA
+___exithl                  = D1A8D1
+skip._exit                 = D1A8D1
+skip.__Exit                = D1A8D1
+skip._abort                = D1A8D1
+_exit.sp                   = D1A8D2
+_exit.flash_wait_states    = D1A8DC
+_main                      = D1AAFC
+_initial_game_setup        = D1AB19
+_get_player_shooting_skill = D1AE1E
+_.str                      = D1AE9D
+_.str.1                    = D1AEBF
+_.str.2                    = D1AEC3
+_.str.3                    = D1AEFC
+_.str.4                    = D1AF33
+_.str.5                    = D1AF6D
+_.str.6                    = D1AF95
+_.str.7                    = D1AFCF
+_.str.8                    = D1AFE9
+_.str.9                    = D1B01E
+_.str.10                   = D1B032
+_.str.11                   = D1B063
+_.str.12                   = D1B098
+_.str.13                   = D1B0CA
+_.str.14                   = D1B0FF
+_.str.15                   = D1B121
+_.str.16                   = D1B150
+_.str.17                   = D1B189
+_.str.18                   = D1B1BA
+_.str.19                   = D1B1F4
+_.str.20                   = D1B22C
+_.str.21                   = D1B249
+_.str.22                   = D1B282
+_.str.23                   = D1B2B8
+_.str.24                   = D1B2DC
+_.str.25                   = D1B316
+_.str.26                   = D1B350
+_.str.27                   = D1B386
+_.str.28                   = D1B3BE
+_.str.29                   = D1B3C9
+_.str.30                   = D1B403
+_.str.31                   = D1B441
+_.str.32                   = D1B479
+_.str.33                   = D1B4B0
+_.str.34                   = D1B4E4
+_.str.35                   = D1B4F3
+_.str.36                   = D1B525
+_.str.37                   = D1B532
+_.str.38                   = D1B55B
+_.str.39                   = D1B595
+_.str.40                   = D1B5C7
+_.str.41                   = D1B603
+_player_shooting_skill     = D052C6
