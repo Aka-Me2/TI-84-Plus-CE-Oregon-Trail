@@ -3,10 +3,10 @@
 #include <ti/tokens.h>
 #include <string.h>
 
-int oxen_spending, food_spending, ammo_spending, clothing_spending, misc_spending;
-int cash_left, total_mileage, bullets, food, clothing, misc_supplies;
-int current_turn;
-int player_shooting_skill;
+int oxen_spending, food_spending, ammo_spending, clothing_spending, misc_spending,
+cash_left, total_mileage, bullets, food, clothing, misc_supplies,
+current_turn,
+player_shooting_skill;
 
 void initial_game_setup();
 void get_player_shooting_skill();
