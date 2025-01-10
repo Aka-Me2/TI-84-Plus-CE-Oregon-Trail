@@ -1,4 +1,5 @@
 #include <ti/getcsc.h>
+#include <ti/getkey.h>
 #include <ti/screen.h>
 #include <ti/tokens.h>
 #include <string.h>
@@ -10,6 +11,7 @@ player_shooting_skill;
 
 void initial_game_setup();
 void get_player_shooting_skill();
+void initial_purchases();
 
 int main()
 {
@@ -17,6 +19,7 @@ int main()
 
     initial_game_setup();
     get_player_shooting_skill();
+    initial_purchases();
 
     return 0;
 }
@@ -114,7 +117,6 @@ void initial_game_setup()
 
 void get_player_shooting_skill()
 {
-    char input[1];
     os_PutStrFull("HOW GOOD A SHOT ARE YOU WITH YOUR RIFLE?");
     os_NewLine();
     os_PutStrFull("  (1) ACE MARKSMAN,  (2) GOOD SHOT,  (3) FAIR TO MIDDLIN'");
@@ -123,22 +125,35 @@ void get_player_shooting_skill()
     os_NewLine();
     os_PutStrFull("ENTER ONE OF THE ABOVE -- THE BETTER YOU CLAIM YOU ARE, THE");
     os_NewLine();
-    switch(os_GetTokenInput("FASTER YOU'LL HAVE TO BE WITH YOUR GUN TO BE SUCCESSFUL.", input, 1))
+    os_PutStrFull("FASTER YOU'LL HAVE TO BE WITH YOUR GUN TO BE SUCCESSFUL.");
+    os_NewLine();
+    os_PutStrFull("?");
+    switch(os_GetKey())
     {
-        case 1:
+        case sk_1:
         player_shooting_skill = 1;
+        os_PutStrFull("1");
         break;
-        case 2:
+        case sk_2:
         player_shooting_skill = 2;
+        os_PutStrFull("2");
         break;
-        case 3:
+        case sk_3:
         player_shooting_skill = 3;
+        os_PutStrFull("3");
         break;
-        case 4:
+        case sk_4:
         player_shooting_skill = 4;
+        os_PutStrFull("4");
         break;
-        case 5:
+        case sk_5:
         player_shooting_skill = 5;
+        os_PutStrFull("5");
         break;
     }
+}
+
+void initial_purchases()
+{
+    
 }
