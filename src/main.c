@@ -6,7 +6,7 @@
 
 int oxen_spending, food_spending, ammo_spending, clothing_spending, misc_spending,
 cash_left, total_mileage, bullets, food, clothing, misc_supplies,
-current_turn,
+current_turn = 0,
 player_shooting_skill;
 
 void initial_game_setup();
@@ -22,6 +22,59 @@ int main()
     initial_purchases();
 
     return 0;
+}
+
+int get_int_input()
+{
+    int int_input;
+    int get_key;
+    int place  = 0;
+    bool break_loop = false;
+
+    do
+    {
+        switch (os_GetKey())
+        {
+        case sk_0:
+            get_key = 0;
+            break;
+        case sk_1:
+            get_key = 1;
+            break;
+        case sk_2:
+            get_key = 2;
+            break;
+        case sk_3:
+            get_key = 3;
+            break;
+        case sk_4:
+            get_key = 4;
+            break;
+        case sk_5:
+            get_key = 5;
+            break;
+        case sk_6:
+            get_key = 6;
+            break;
+        case sk_7:
+            get_key = 7;
+            break;
+        case sk_8:
+            get_key = 8;
+            break;
+        case sk_9:
+            get_key = 9;
+            break;
+        case sk_Enter:
+            break_loop = true;
+            break;
+        }
+
+        int_input += get_key*10^place;
+        place += 1;
+    } while (!break_loop);
+    
+
 }
 
 void initial_game_setup()
@@ -154,6 +207,86 @@ void get_player_shooting_skill()
 }
 
 void initial_purchases()
+{
+    do
+    {
+        oxen_spending = get_int_input();
+    }while(!200 <= oxen_spending <= 300);
+    
+}
+
+void find_date()
+{
+    os_PutStrFull("MONDAY ");
+    switch(current_turn)
+    {
+    case 0:
+        os_PutStrFull("APRIL 12");
+        break;
+    case 1:
+        os_PutStrFull("APRIL 26");
+        break;
+    case 2:
+        os_PutStrFull("MAY 10");
+        break;
+    case 3:
+        os_PutStrFull("MAY 24");
+        break;
+    case 4:
+        os_PutStrFull("JUNE 7");
+        break;
+    case 5:
+        os_PutStrFull("JUNE 21");
+        break;
+    case 6:
+        os_PutStrFull("JULY 5");
+        break;
+    case 7:
+        os_PutStrFull("JULY 19");
+        break;
+    case 8:
+        os_PutStrFull("AUGUST 2");
+        break;
+    case 9:
+        os_PutStrFull("AUGUST 16");
+        break;
+    case 10:
+        os_PutStrFull("AUGUST 31");
+        break;
+    case 11:
+        os_PutStrFull("SEPTEMBER 13");
+        break;
+    case 12:
+        os_PutStrFull("SEPTEMBER 27");
+        break;
+    case 13:
+        os_PutStrFull("OCTOBER 11");
+        break;
+    case 14:
+        os_PutStrFull("OCTOBER 25");
+        break;
+    case 15:
+        os_PutStrFull("NOVEMBER 8");
+        break;
+    case 16:
+        os_PutStrFull("NOVEMBER 22");
+        break;
+    case 17:
+        os_PutStrFull("DECEMBER 6");
+        break;
+    case 18:
+        os_PutStrFull("DECEMBER 20");
+        break;
+    case 19:
+        os_PutStrFull("YOU HAVE BEEN ON THE TRAIL TOO LONG ------");
+        os_NewLine();
+        os_PutStrFull("YOUR FAMILY DIES IN THE FIRST BLIZZARD OF WINTER");
+        os_NewLine();
+        break;
+    }
+}
+
+void main_loop()
 {
     
 }
