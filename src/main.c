@@ -4,10 +4,16 @@
 #include <ti/tokens.h>
 #include <string.h>
 
-int oxen_spending, food_spending, ammo_spending, clothing_spending, misc_spending,
-cash_left, total_mileage, bullets, food, clothing, misc_supplies,
+int oxen_spending, food_spending, ammo_spending, 
+clothing_spending, misc_spending,
+cash_left, total_mileage, bullets, 
+food, clothing, misc_supplies,
 current_turn = 0,
 player_shooting_skill;
+
+bool illnes_flag = false, injury_flag = false,
+south_pass_flag = false, fort_option_flag = false,
+blizzard_flag = false, blue_mountain_flag = false;
 
 void initial_game_setup();
 void get_player_shooting_skill();
@@ -33,7 +39,7 @@ int get_int_input()
 
     do
     {
-        switch (os_GetKey())
+        switch(os_GetKey())
         {
         case sk_0:
             get_key = 0;
@@ -213,80 +219,178 @@ void initial_purchases()
         oxen_spending = get_int_input();
     }while(!200 <= oxen_spending <= 300);
     
+    os_NewLine();
 }
 
 void find_date()
 {
+    os_NewLine();
     os_PutStrFull("MONDAY ");
     switch(current_turn)
     {
     case 0:
-        os_PutStrFull("APRIL 12");
+        os_PutStrFull("MARCH 29 1847");
         break;
     case 1:
-        os_PutStrFull("APRIL 26");
+        os_PutStrFull("APRIL 12");
         break;
     case 2:
-        os_PutStrFull("MAY 10");
+        os_PutStrFull("APRIL 26");
         break;
     case 3:
-        os_PutStrFull("MAY 24");
+        os_PutStrFull("MAY 10");
         break;
     case 4:
-        os_PutStrFull("JUNE 7");
+        os_PutStrFull("MAY 24");
         break;
     case 5:
-        os_PutStrFull("JUNE 21");
+        os_PutStrFull("JUNE 7");
         break;
     case 6:
-        os_PutStrFull("JULY 5");
+        os_PutStrFull("JUNE 21");
         break;
     case 7:
-        os_PutStrFull("JULY 19");
+        os_PutStrFull("JULY 5");
         break;
     case 8:
-        os_PutStrFull("AUGUST 2");
+        os_PutStrFull("JULY 19");
         break;
     case 9:
-        os_PutStrFull("AUGUST 16");
+        os_PutStrFull("AUGUST 2");
         break;
     case 10:
-        os_PutStrFull("AUGUST 31");
+        os_PutStrFull("AUGUST 16");
         break;
     case 11:
-        os_PutStrFull("SEPTEMBER 13");
+        os_PutStrFull("AUGUST 31");
         break;
     case 12:
-        os_PutStrFull("SEPTEMBER 27");
+        os_PutStrFull("SEPTEMBER 13");
         break;
     case 13:
-        os_PutStrFull("OCTOBER 11");
+        os_PutStrFull("SEPTEMBER 27");
         break;
     case 14:
-        os_PutStrFull("OCTOBER 25");
+        os_PutStrFull("OCTOBER 11");
         break;
     case 15:
-        os_PutStrFull("NOVEMBER 8");
+        os_PutStrFull("OCTOBER 25");
         break;
     case 16:
-        os_PutStrFull("NOVEMBER 22");
+        os_PutStrFull("NOVEMBER 8");
         break;
     case 17:
-        os_PutStrFull("DECEMBER 6");
+        os_PutStrFull("NOVEMBER 22");
         break;
     case 18:
-        os_PutStrFull("DECEMBER 20");
+        os_PutStrFull("DECEMBER 6");
         break;
     case 19:
+        os_PutStrFull("DECEMBER 20");
+        break;
+    case 20:
         os_PutStrFull("YOU HAVE BEEN ON THE TRAIL TOO LONG ------");
         os_NewLine();
         os_PutStrFull("YOUR FAMILY DIES IN THE FIRST BLIZZARD OF WINTER");
         os_NewLine();
         break;
     }
+    os_PutStrFull("1847");
+}
+
+void hunting_subrout()
+{
+    char shooting_words[4][5] = 
+    {
+        "BANG",
+        "BLAM",
+        "POW",
+        "WHAM"
+    };
+
+    if(ammo_spending > 39)
+    {
+        total_mileage -= 45;
+
+        // Chooses random word from a list and prints it
+        // char random_word[5] = shooting_words[random(1, 4)];
+        // os_PutStrFull(random_word);
+    }
+
+    os_NewLine();
+    os_PutStrFull("TOUGH---YOU NEED MORE BULLETS TO GO HUNTING");
 }
 
 void main_loop()
 {
-    
+    os_NewLine();
+
+    if(food_spending < 0)
+    {
+        food_spending = 0;
+    }
+    if(ammo_spending < 0)
+    {
+        ammo_spending = 0;
+    }
+    if(clothing_spending < 0)
+    {
+        clothing_spending = 0;
+    }
+    if(misc_spending < 0)
+    {
+        misc_spending = 0;
+    }
+    if(food_spending < 13)
+    {
+        os_NewLine();
+        os_PutStrFull("YOU'D BETTER DO SOME HUNTING OR BUY FOOD SOON!!!!");
+    }
+
+    if(illnes_flag || injury_flag)
+    {
+        cash_left -= 20;
+        os_NewLine();
+        os_PutStrFull("DOCTOR'S BILL IS $20");
+        illnes_flag = false;
+        injury_flag = false;
+        // Add no money left case
+    }
+
+    if(south_pass_flag)
+    {
+        os_NewLine();
+        os_PutStrFull("TOTAL MILEAGE IS 950");
+        south_pass_flag = false;
+    }else
+    {
+        os_NewLine();
+        os_PutStrFull("TOTAL MILEAGE IS"); // Add printing the mileage
+    }
+
+    os_NewLine();
+    // I don't think that's how it's actually printed in game
+    os_PutStrFull("FOOD, BULLETS, CLOTHING, MISC. SUPP., CASH");
+    // Print the variable's values
+
+    if(!fort_option_flag)
+    {
+        os_NewLine();
+        os_PutStrFull("DO YOU WANT TO (1) HUNT, OR (2) CONTINUE");
+        switch (get_int_input())
+        {
+            case 1:
+
+                break;
+            case 2:
+                break;
+        }
+
+    }else
+    {
+        os_NewLine();
+        os_PutStrFull("DO YOU WANT TO (1) STOP AT THE NEXT FORT, (2) HUNT, ");
+        os_NewLine();
+        os_PutStrFull("OR (3) CONTINUE");
+    }
 }
