@@ -2,6 +2,7 @@
 #include <ti/getkey.h>
 #include <ti/screen.h>
 #include <ti/tokens.h>
+#include <math.h>
 #include <string.h>
 
 int oxen_spending, food_spending, ammo_spending, 
@@ -300,6 +301,7 @@ void find_date()
 
 void hunting_subrout()
 {
+    int random_word;
     char shooting_words[4][5] = 
     {
         "BANG",
@@ -312,13 +314,18 @@ void hunting_subrout()
     {
         total_mileage -= 45;
 
+        random_word = rintf(4);
+        os_NewLine();
+        os_PutStrFull("TYPE ", shooting_words[random_word]);
+        
         // Chooses random word from a list and prints it
         // char random_word[5] = shooting_words[random(1, 4)];
         // os_PutStrFull(random_word);
+    }else
+    {
+        os_NewLine();
+        os_PutStrFull("TOUGH---YOU NEED MORE BULLETS TO GO HUNTING");
     }
-
-    os_NewLine();
-    os_PutStrFull("TOUGH---YOU NEED MORE BULLETS TO GO HUNTING");
 }
 
 void main_loop()
