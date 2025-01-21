@@ -2,6 +2,7 @@
 #include <ti/getkey.h>
 #include <ti/screen.h>
 #include <ti/tokens.h>
+#include <sys/timers.h>
 #include <math.h>
 #include <string.h>
 
@@ -16,9 +17,13 @@ bool illnes_flag = false, injury_flag = false,
 south_pass_flag = false, fort_option_flag = false,
 blizzard_flag = false, blue_mountain_flag = false;
 
+int get_int_input();
 void initial_game_setup();
 void get_player_shooting_skill();
 void initial_purchases();
+void find_date();
+void hunting_subrout();
+void main_loop();
 
 int main()
 {
@@ -33,55 +38,61 @@ int main()
 
 int get_int_input()
 {
-    int int_input;
-    int get_key;
-    int place  = 0;
+    int int_input = 0;
     bool break_loop = false;
 
-    do
+    while (break_loop == false)
     {
+        int place  = 0;
+
         switch(os_GetKey())
         {
-        case sk_0:
-            get_key = 0;
+        case k_0:
+            int_input *= 10;
+            place += 1;
             break;
-        case sk_1:
-            get_key = 1;
+        case k_1:
+            int_input += 1*10^place;
+            place += 1;
             break;
-        case sk_2:
-            get_key = 2;
+        case k_2:
+            int_input += 2*10^place;
+            place += 1;
             break;
-        case sk_3:
-            get_key = 3;
+        case k_3:
+            int_input += 3*10^place;
+            place += 1;
             break;
-        case sk_4:
-            get_key = 4;
+        case k_4:
+            int_input += 4*10^place;
+            place += 1;
             break;
-        case sk_5:
-            get_key = 5;
+        case k_5:
+            int_input += 5*10^place;
+            place += 1;
             break;
-        case sk_6:
-            get_key = 6;
+        case k_6:
+            int_input += 6*10^place;
+            place += 1;
             break;
-        case sk_7:
-            get_key = 7;
+        case k_7:
+            int_input += 7*10^place;
+            place += 1;
             break;
-        case sk_8:
-            get_key = 8;
+        case k_8:
+            int_input += 8*10^place;
+            place += 1;
             break;
-        case sk_9:
-            get_key = 9;
+        case k_9:
+            int_input += 9*10^place;
+            place += 1;
             break;
-        case sk_Enter:
+        case k_Enter:
             break_loop = true;
             break;
         }
-
-        int_input += get_key*10^place;
-        place += 1;
-    } while (!break_loop);
-    
-
+    }
+    return int_input;
 }
 
 void initial_game_setup()
@@ -188,39 +199,12 @@ void get_player_shooting_skill()
     os_PutStrFull("FASTER YOU'LL HAVE TO BE WITH YOUR GUN TO BE SUCCESSFUL.");
     os_NewLine();
     os_PutStrFull("?");
-    switch(os_GetKey())
-    {
-        case sk_1:
-        player_shooting_skill = 1;
-        os_PutStrFull("1");
-        break;
-        case sk_2:
-        player_shooting_skill = 2;
-        os_PutStrFull("2");
-        break;
-        case sk_3:
-        player_shooting_skill = 3;
-        os_PutStrFull("3");
-        break;
-        case sk_4:
-        player_shooting_skill = 4;
-        os_PutStrFull("4");
-        break;
-        case sk_5:
-        player_shooting_skill = 5;
-        os_PutStrFull("5");
-        break;
-    }
+    player_shooting_skill = get_int_input();
 }
 
 void initial_purchases()
 {
-    do
-    {
-        oxen_spending = get_int_input();
-    }while(!200 <= oxen_spending <= 300);
-    
-    os_NewLine();
+    oxen_spending = get_int_input();
 }
 
 void find_date()
@@ -316,8 +300,9 @@ void hunting_subrout()
 
         random_word = rintf(4);
         os_NewLine();
-        os_PutStrFull("TYPE ", shooting_words[random_word]);
-        
+        os_PutStrFull("TYPE ");
+        os_PutStrFull(shooting_words[random_word]);
+        timer_Enable(1, TIMER_32K, TIMER_NOINT, TIMER_UP);
         // Chooses random word from a list and prints it
         // char random_word[5] = shooting_words[random(1, 4)];
         // os_PutStrFull(random_word);
