@@ -6,10 +6,13 @@
 #include <math.h>
 #include <string.h>
 
-int oxen_spending, food_spending, ammo_spending, 
-clothing_spending, misc_spending,
-cash_left, total_mileage, bullets, 
-food, clothing, misc_supplies,
+int oxen_spending, 
+food_spending = -1, 
+ammo_spending = -1, 
+clothing_spending = -1, 
+misc_spending = -1,
+cash_left, 
+total_mileage, 
 current_turn = 0,
 player_shooting_skill;
 
@@ -204,7 +207,87 @@ void get_player_shooting_skill()
 
 void initial_purchases()
 {
-    oxen_spending = get_int_input();
+    while((700 - oxen_spending - food_spending - ammo_spending - clothing_spending - misc_spending) < 0)
+    {
+        os_NewLine();
+        os_NewLine();
+        os_NewLine();
+        os_PutStrFull("HOW MUCH DO YOU WANT TO SPEND ON YOUR OXEN TEAM");
+        while(oxen_spending < 200 && oxen_spending > 300)
+        {
+            oxen_spending = get_int_input();
+            if(oxen_spending < 200)
+            {
+                os_NewLine();
+                os_PutStrFull("NOT ENOUGH");
+    
+            }else if(oxen_spending > 300)
+            {
+                os_NewLine();
+                os_PutStrFull("TOO MUCH");
+            }
+        }
+    
+        os_NewLine();
+        os_PutStrFull("HOW MUCH DO YOU WANT TO SPEND ON FOOD");
+        while(food_spending < 0)
+        {
+            food_spending = get_int_input();
+            if(food_spending < 0)
+            {
+                os_NewLine();
+                os_PutStrFull("IMPOSSIBLE");
+            }
+        }
+        
+        os_NewLine();
+        os_PutStrFull("HOW MUCH DO YOU WANT TO SPEND ON AMMUNITION");
+        while(ammo_spending < 0)
+        {
+            ammo_spending = get_int_input();
+            if(ammo_spending < 0)
+            {
+                os_NewLine();
+                os_PutStrFull("IMPOSSIBLE");
+            }
+        }
+    
+        os_NewLine();
+        os_PutStrFull("HOW MUCH DO YOU WANT TO SPEND ON CLOTHING");
+        while(clothing_spending < 0)
+        {
+            clothing_spending = get_int_input();
+            if(clothing_spending < 0)
+            {
+                os_NewLine();
+                os_PutStrFull("IMPOSSIBLE");
+            }
+        }
+    
+        os_NewLine();
+        os_PutStrFull("HOW MUCH DO YOU WANT TO SPEND ON MISCELLANEOUS SUPPLIES");
+        while(misc_spending < 0)
+        {
+            misc_spending = get_int_input();
+            if(misc_spending < 0)
+            {
+                os_NewLine();
+                os_PutStrFull("IMPOSSIBLE");
+            }
+        }
+
+        if((700 - oxen_spending - food_spending - ammo_spending - clothing_spending - misc_spending) < 0)
+        {
+            os_NewLine();
+            os_PutStrFull("YOU OVERSPENT--YOU ONLY HAD $700 TO SPEND. BUY AGAIN");
+        }
+    }
+
+    // Print how many dollars are left
+    os_NewLine();
+    os_NewLine();
+    os_PutStrFull("MONDAY MARCH 29 1847");
+    os_NewLine();
 }
 
 void find_date()
