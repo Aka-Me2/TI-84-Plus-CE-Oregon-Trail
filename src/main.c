@@ -20,12 +20,9 @@ bool illnes_flag = false, injury_flag = false,
 south_pass_flag = false, fort_option_flag = false,
 blizzard_flag = false, blue_mountain_flag = false;
 
-int get_int_input();
 void initial_game_setup();
 void get_player_shooting_skill();
 void initial_purchases();
-void find_date();
-void hunting_subrout();
 void main_loop();
 
 int main()
@@ -35,6 +32,7 @@ int main()
     initial_game_setup();
     get_player_shooting_skill();
     initial_purchases();
+    main_loop();
 
     return 0;
 }
@@ -396,6 +394,11 @@ void hunting_subrout()
     }
 }
 
+void fort_stop_subrout()
+{
+
+}
+
 void main_loop()
 {
     os_NewLine();
@@ -452,7 +455,7 @@ void main_loop()
     {
         os_NewLine();
         os_PutStrFull("DO YOU WANT TO (1) HUNT, OR (2) CONTINUE");
-        switch (get_int_input())
+        switch(get_int_input())
         {
             case 1:
 
@@ -467,5 +470,16 @@ void main_loop()
         os_PutStrFull("DO YOU WANT TO (1) STOP AT THE NEXT FORT, (2) HUNT, ");
         os_NewLine();
         os_PutStrFull("OR (3) CONTINUE");
+        switch(get_int_input())
+        {
+        case 1:
+            fort_stop_subrout();
+            break;
+        case 2:
+            hunting_subrout();
+            break;
+        case 3:
+            break;
+        }
     }
 }
