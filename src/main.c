@@ -6,11 +6,11 @@
 #include <math.h>
 #include <string.h>
 
-int oxen_spending, 
-food_spending = -1, 
-ammo_spending = -1, 
-clothing_spending = -1, 
-misc_spending = -1,
+int oxen_spending = 0, 
+food_spending = 0, 
+ammo_spending = 0, 
+clothing_spending = 0, 
+misc_spending = 0,
 cash_left, 
 total_mileage, 
 current_turn = 0,
@@ -44,49 +44,46 @@ int get_int_input()
 
     while (break_loop == false)
     {
-        int place  = 0;
-
         switch(os_GetKey())
         {
         case k_0:
             int_input *= 10;
-            place += 1;
             break;
         case k_1:
-            int_input += 1*10^place;
-            place += 1;
+            int_input *= 10;
+            int_input += 1;
             break;
         case k_2:
-            int_input += 2*10^place;
-            place += 1;
+            int_input *= 10;
+            int_input += 2;
             break;
         case k_3:
-            int_input += 3*10^place;
-            place += 1;
+            int_input *= 10;
+            int_input += 3;
             break;
         case k_4:
-            int_input += 4*10^place;
-            place += 1;
+            int_input *= 10;
+            int_input += 4;
             break;
         case k_5:
-            int_input += 5*10^place;
-            place += 1;
+            int_input *= 10;
+            int_input += 5;
             break;
         case k_6:
-            int_input += 6*10^place;
-            place += 1;
+            int_input *= 10;
+            int_input += 6;
             break;
         case k_7:
-            int_input += 7*10^place;
-            place += 1;
+            int_input *= 10;
+            int_input += 7;
             break;
         case k_8:
-            int_input += 8*10^place;
-            place += 1;
+            int_input *= 10;
+            int_input += 8;
             break;
         case k_9:
-            int_input += 9*10^place;
-            place += 1;
+            int_input *= 10;
+            int_input += 9;
             break;
         case k_Enter:
             break_loop = true;
@@ -100,7 +97,7 @@ void initial_game_setup()
 {
     char ans[4];
     os_GetStringInput("DO YOU NEED INSTRUCTIONS (YES/NO)", ans, 4);
-    if(strcmp(ans, "YES") == 0)
+    if(!(strcmp(ans, "NO") == 0))
     {
         os_PutStrFull("THIS PROGRAM SIMULATES A TRIP OVER THE OREGON TRAIL FROM");
         os_NewLine();
@@ -204,84 +201,91 @@ void get_player_shooting_skill()
 }
 
 void initial_purchases()
-{
-    while((700 - oxen_spending - food_spending - ammo_spending - clothing_spending - misc_spending) < 0)
+{   
+    do
     {
         os_NewLine();
         os_NewLine();
-        os_NewLine();
-        os_PutStrFull("HOW MUCH DO YOU WANT TO SPEND ON YOUR OXEN TEAM");
-        while(oxen_spending < 200 && oxen_spending > 300)
+        
+        do
         {
+            os_NewLine();
+            os_PutStrFull("HOW MUCH DO YOU WANT TO SPEND ON YOUR OXEN TEAM");
             oxen_spending = get_int_input();
             if(oxen_spending < 200)
             {
                 os_NewLine();
                 os_PutStrFull("NOT ENOUGH");
-    
-            }else if(oxen_spending > 300)
+
+            }
+            if(oxen_spending > 300)
             {
                 os_NewLine();
                 os_PutStrFull("TOO MUCH");
             }
-        }
-    
-        os_NewLine();
-        os_PutStrFull("HOW MUCH DO YOU WANT TO SPEND ON FOOD");
-        while(food_spending < 0)
+        }while(oxen_spending < 200 || oxen_spending > 300);
+
+        do
         {
+            os_NewLine();
+            os_PutStrFull("HOW MUCH DO YOU WANT TO SPEND ON FOOD");
             food_spending = get_int_input();
             if(food_spending < 0)
             {
                 os_NewLine();
                 os_PutStrFull("IMPOSSIBLE");
             }
-        }
-        
-        os_NewLine();
-        os_PutStrFull("HOW MUCH DO YOU WANT TO SPEND ON AMMUNITION");
-        while(ammo_spending < 0)
+        }while(food_spending < 0);
+
+        do
         {
+            os_NewLine();
+            os_PutStrFull("HOW MUCH DO YOU WANT TO SPEND ON AMMUNITION");
             ammo_spending = get_int_input();
             if(ammo_spending < 0)
             {
                 os_NewLine();
                 os_PutStrFull("IMPOSSIBLE");
             }
-        }
-    
-        os_NewLine();
-        os_PutStrFull("HOW MUCH DO YOU WANT TO SPEND ON CLOTHING");
-        while(clothing_spending < 0)
+        }while(ammo_spending < 0);
+
+        do
         {
+            os_NewLine();
+            os_PutStrFull("HOW MUCH DO YOU WANT TO SPEND ON CLOTHING");
             clothing_spending = get_int_input();
             if(clothing_spending < 0)
             {
                 os_NewLine();
                 os_PutStrFull("IMPOSSIBLE");
             }
-        }
-    
-        os_NewLine();
-        os_PutStrFull("HOW MUCH DO YOU WANT TO SPEND ON MISCELLANEOUS SUPPLIES");
-        while(misc_spending < 0)
+        }while(clothing_spending < 0);
+
+        do
         {
+            os_NewLine();
+            os_PutStrFull("HOW MUCH DO YOU WANT TO SPEND ON MISCELLANEOUS SUPPLIES");
             misc_spending = get_int_input();
             if(misc_spending < 0)
             {
                 os_NewLine();
                 os_PutStrFull("IMPOSSIBLE");
             }
-        }
+        }while(misc_spending < 0);
 
         if((700 - oxen_spending - food_spending - ammo_spending - clothing_spending - misc_spending) < 0)
         {
             os_NewLine();
             os_PutStrFull("YOU OVERSPENT--YOU ONLY HAD $700 TO SPEND. BUY AGAIN");
+            // Actually make you buy again
         }
-    }
-
+    }while((700 - oxen_spending - food_spending - ammo_spending - clothing_spending - misc_spending) < 0);
+    
+    ammo_spending *= 50;
+    os_NewLine();
+    os_PutStrFull("AFTER ALL YOUR PURCHASES, YOU NOW HAVE ");
     // Print how many dollars are left
+    os_PutStrFull(" DOLLARS LEFT");
     os_NewLine();
     os_NewLine();
     os_PutStrFull("MONDAY MARCH 29 1847");
