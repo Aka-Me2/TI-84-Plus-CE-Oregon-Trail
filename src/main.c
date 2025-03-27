@@ -465,25 +465,26 @@ void main_loop()
 
                 break;
             case 2:
+                hunting_subrout();
                 break;
         }
-
     }else
     {
+        fort_option_flag = false;
         os_NewLine();
         os_PutStrFull("DO YOU WANT TO (1) STOP AT THE NEXT FORT, (2) HUNT, ");
         os_NewLine();
         os_PutStrFull("OR (3) CONTINUE");
         switch(get_int_input())
         {
-        case 1:
-            fort_stop_subrout();
-            break;
-        case 2:
-            hunting_subrout();
-            break;
-        case 3:
-            break;
+            case 1:
+                fort_stop_subrout();
+                break;
+            case 2:
+                hunting_subrout();
+                break;
+            case 3:
+                break;
         }
     }
 }
